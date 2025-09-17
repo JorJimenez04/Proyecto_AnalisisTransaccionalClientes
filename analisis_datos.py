@@ -12,6 +12,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash.exceptions import PreventUpdate
 from dash import callback_context
+from config import config
 
 warnings.filterwarnings('ignore')
 
@@ -1210,24 +1211,11 @@ app = dash.Dash(
 )
 print("✅ [DEBUG] Instancia de Dash creada.")
 
-# Configuración del servidor
 server = app.server
 print("✅ [DEBUG] Objeto 'server' de Flask asignado.")
-
-# ---- UI helpers ----
-# ... existing code ...
 print("✅ [DEBUG] Helpers de UI definidos.")
-
-# ---- Vistas ----
-# ... existing code ...
 print("✅ [DEBUG] Vistas definidas.")
-
-# ---- Layout base ----
-# ... existing code ...
 print("✅ [DEBUG] Layout de la aplicación definido.")
-
-# ---- Callbacks ----
-# ... existing code ...
 print("✅ [DEBUG] Callbacks definidos.")
 # =========================
 # Main
