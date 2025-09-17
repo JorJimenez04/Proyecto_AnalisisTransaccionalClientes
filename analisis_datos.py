@@ -635,40 +635,68 @@ app.layout = dbc.Container([
     # Stores para datos
     dcc.Store(id='data-store', data=None, storage_type='memory'),
     dcc.Store(id='meta-store', data=None, storage_type='memory'),
-    
-    # Contenedor principal
-    html.Div(
-        id='app-body',
-        children=vista_gate("Por favor, adjunta tu archivo para comenzar con el análisis"),
-        style={'color': '#2C3E50','fontSize': '16px'}
-    ),
-    
+    # Contenedor principal con estilos de texto personalizables
+    html.Div(id='app-body', children=vista_gate("Por favor, adjunta tu archivo para comenzar con el análisis"), 
+             style={'color': '#2C3E50','fontSize': '16px'}),
     # Componente para refresh
     html.Div(id='dummy-refresh'),
+    # Componentes necesarios para callbacks (ocultos inicialmente)
+    html.Div([
+        # Remove or rename this duplicate upload component - it's not needed
+        # dcc.Upload(id='upload-data', style={'display': 'none'}),
+        html.Div(id='upload-status', style={'display': 'none'}),
+        dcc.Dropdown(id='mes-select', style={'display': 'none'}),
+        dcc.Graph(id='g-tiempo', style={'display': 'none'}),
+        dcc.Graph(id='g-bancos', style={'display': 'none'}),
+        dash_table.DataTable(
+            id='tabla-ranking',
+            data=[],
+            columns=[],
+            style_table={'display': 'none'}
+        ),
+        dcc.Graph(id='graf-ranking', style={'display': 'none'}),
+        dcc.Download(id='dl-rank'),
+        dcc.RadioItems(
+            id='rank-segmento',
+            options=[{'label': 'Naturales', 'value': 'Natural'},
+                    {'label': 'Jurídicas', 'value': 'Jurídica'}],
+            value='Natural',
+            style={'display': 'none'}
+        ),
+        dcc.RadioItems(
+            id='rank-metrica',
+            options=[{'label': 'Monto (COP)', 'value': 'MONTO'},
+                    {'label': '# Transacciones', 'value': 'TX'}],
+            value='MONTO',
+            style={'display': 'none'}
+        ),
+        dcc.Input(
+            id='rank-topn',
+            type='number',
+            value=10,
+            min=3,
+            max=50,
+            step=1,
+            style={'display': 'none'}
+        ),
+        dbc.Button(id='btn-new-analysis', style={'display': 'none'}),
+        dbc.Button(id='btn-reload', style={'display': 'none'}),
+        dbc.Button(id='btn-dl-rank', style={'display': 'none'})
+    ], id='hidden-components')
 ], fluid=True)
 
 # ---- Validation layout ----
-
 app.validation_layout = html.Div([
     # Layout base
     app.layout,
-    # Componentes adicionales que pueden aparecer dinámicamente
+    # Only include components that don't already exist in the main layout
     html.Div([
-        dcc.Upload(id='upload-data-validation'),
-        html.Div(id='upload-status-validation'),
-        dcc.Dropdown(id='mes-select-validation'),
+        # Don't include dcc.Upload(id='upload-data') since it's already in the main layout
+        dcc.Dropdown(id='mes-select-validation', options=[]),  # Add unique IDs for validation-only components
         dcc.Graph(id='g-tiempo-validation'),
         dcc.Graph(id='g-bancos-validation'),
-        dash_table.DataTable(
-            id='tabla-ranking-validation',
-            columns=[],
-            data=[]
-        ),
-        dcc.Graph(id='graf-ranking-validation'),
-        dcc.Download(id='dl-rank-validation'),
         dbc.Button(id='btn-new-analysis-validation'),
         dbc.Button(id='btn-reload-validation'),
-        dbc.Button(id='btn-dl-rank-validation'),
         dcc.RadioItems(id='rank-segmento-validation'),
         dcc.RadioItems(id='rank-metrica-validation'),
         dcc.Input(id='rank-topn-validation')
