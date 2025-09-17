@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os, base64, tempfile, warnings, chardet, logging, unicodedata
-import dash
 import pandas as pd, numpy as np
 from datetime import datetime
 from dash import Dash, html, dcc, Input, Output, State
@@ -637,14 +636,20 @@ app.layout = dbc.Container([
     # Stores para datos
     dcc.Store(id='data-store', data=None, storage_type='memory'),
     dcc.Store(id='meta-store', data=None, storage_type='memory'),
-    # Contenedor principal con estilos de texto personalizables
-    html.Div(id='app-body', children=vista_gate("Por favor, adjunta tu archivo para comenzar con el análisis"), 
-             style={'color': '#2C3E50','fontSize': '16px'}),  # Aquí puedes cambiar el color y tamaño del texto
+    
+    # Contenedor principal
+    html.Div(
+        id='app-body',
+        children=vista_gate("Por favor, adjunta tu archivo para comenzar con el análisis"),
+        style={'color': '#2C3E50','fontSize': '16px'}
+    ),
+    
     # Componente para refresh
     html.Div(id='dummy-refresh'),
+    
     # Componentes necesarios para callbacks (ocultos inicialmente)
     html.Div([
-        dcc.Upload(id='upload-data', style={'display': 'none'}),
+        # Componentes que aparecen dinámicamente en las vistas
         html.Div(id='upload-status', style={'display': 'none'}),
         dcc.Dropdown(id='mes-select', style={'display': 'none'}),
         dcc.Graph(id='g-tiempo', style={'display': 'none'}),
@@ -693,22 +698,22 @@ app.validation_layout = html.Div([
     # Componentes adicionales que pueden aparecer dinámicamente
     html.Div([
         dcc.Upload(id='upload-data'),
-        html.Div(id='upload-status'),
-        dcc.Dropdown(id='mes-select'),
-        dcc.Graph(id='g-tiempo'),
-        dcc.Graph(id='g-bancos'),
+        html.Div(id='upload-status-validation'),
+        dcc.Dropdown(id='mes-select-validation'),
+        dcc.Graph(id='g-tiempo-validation'),
+        dcc.Graph(id='g-bancos-validation'),
         dash_table.DataTable(
-            id='tabla-ranking',
+            id='tabla-ranking-validation',
             columns=[],
             data=[]
         ),
-        dcc.Graph(id='graf-ranking'),
-        dcc.Download(id='dl-rank'),
-        dbc.Button(id='btn-new-analysis'),
-        dbc.Button(id='btn-reload'),
-        dcc.RadioItems(id='rank-segmento'),
-        dcc.RadioItems(id='rank-metrica'),
-        dcc.Input(id='rank-topn')
+        dcc.Graph(id='graf-ranking-validation'),
+        dcc.Download(id='dl-rank-validation'),
+        dbc.Button(id='btn-new-analysis-validation'),
+        dbc.Button(id='btn-reload-validation'),
+        dcc.RadioItems(id='rank-segmento-validation'),
+        dcc.RadioItems(id='rank-metrica-validation'),
+        dcc.Input(id='rank-topn-validation')
     ])
 ])
 
