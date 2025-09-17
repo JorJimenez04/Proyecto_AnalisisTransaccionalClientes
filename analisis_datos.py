@@ -11,7 +11,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash.exceptions import PreventUpdate
 from dash import callback_context
-from config import config
 
 warnings.filterwarnings('ignore')
 
