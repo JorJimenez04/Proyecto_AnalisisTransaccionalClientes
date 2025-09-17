@@ -1199,27 +1199,11 @@ def descargar_ranking(n_clicks, data):
         return dcc.send_data_frame(df.to_csv, filename=f"ranking_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv", index=False)
     except:
         raise PreventUpdate
-print("✅ [DEBUG] Iniciando la aplicación...")
 
-# Configuración del logging
-# ... existing code ...
-print("✅ [DEBUG] Configuración de logging completada.")
-
-# ---- App Dash ----
-app = dash.Dash(
-# ... existing code ...
-)
-print("✅ [DEBUG] Instancia de Dash creada.")
-
-server = app.server
-print("✅ [DEBUG] Objeto 'server' de Flask asignado.")
-print("✅ [DEBUG] Helpers de UI definidos.")
-print("✅ [DEBUG] Vistas definidas.")
-print("✅ [DEBUG] Layout de la aplicación definido.")
-print("✅ [DEBUG] Callbacks definidos.")
 # =========================
 # Main
 # =========================
+
 if __name__ == '__main__':
     # Configuración para Railway
     port = int(os.environ.get("PORT", 8050))
