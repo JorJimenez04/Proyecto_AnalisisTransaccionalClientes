@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, base64, tempfile, warnings, chardet, logging, unicodedata
+import dash
 import pandas as pd, numpy as np
 from datetime import datetime
 from dash import Dash, html, dcc, Input, Output, State
@@ -1197,7 +1198,37 @@ def descargar_ranking(n_clicks, data):
         return dcc.send_data_frame(df.to_csv, filename=f"ranking_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv", index=False)
     except:
         raise PreventUpdate
+print("✅ [DEBUG] Iniciando la aplicación...")
 
+# Configuración del logging
+# ... existing code ...
+print("✅ [DEBUG] Configuración de logging completada.")
+
+# ---- App Dash ----
+app = dash.Dash(
+# ... existing code ...
+)
+print("✅ [DEBUG] Instancia de Dash creada.")
+
+# Configuración del servidor
+server = app.server
+print("✅ [DEBUG] Objeto 'server' de Flask asignado.")
+
+# ---- UI helpers ----
+# ... existing code ...
+print("✅ [DEBUG] Helpers de UI definidos.")
+
+# ---- Vistas ----
+# ... existing code ...
+print("✅ [DEBUG] Vistas definidas.")
+
+# ---- Layout base ----
+# ... existing code ...
+print("✅ [DEBUG] Layout de la aplicación definido.")
+
+# ---- Callbacks ----
+# ... existing code ...
+print("✅ [DEBUG] Callbacks definidos.")
 # =========================
 # Main
 # =========================

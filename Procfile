@@ -1,1 +1,1 @@
-web: gunicorn analisis_datos:server --bind 0.0.0.0:$PORT
+web: gunicorn analisis_datos:server --bind 0.0.0.0:$PORT --timeout 240
