@@ -631,6 +631,8 @@ default_figure = px.scatter(title='Sin datos disponibles').update_layout(
     }]
 )
 
+# Modify only the hidden components section in app.layout:
+
 app.layout = dbc.Container([
     # Stores para datos
     dcc.Store(id='data-store', data=None, storage_type='memory'),
@@ -642,9 +644,8 @@ app.layout = dbc.Container([
     html.Div(id='dummy-refresh'),
     # Componentes necesarios para callbacks (ocultos inicialmente)
     html.Div([
-        # Remove or rename this duplicate upload component - it's not needed
-        # dcc.Upload(id='upload-data', style={'display': 'none'}),
-        html.Div(id='upload-status', style={'display': 'none'}),
+        # Remove both commented-out upload-data and the duplicate upload-status div below
+        # html.Div(id='upload-status', style={'display': 'none'}),
         dcc.Dropdown(id='mes-select', style={'display': 'none'}),
         dcc.Graph(id='g-tiempo', style={'display': 'none'}),
         dcc.Graph(id='g-bancos', style={'display': 'none'}),
